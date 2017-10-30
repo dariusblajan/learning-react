@@ -1,0 +1,4 @@
+node_modules/
+.vscode/
+cezar.config
+*.log

@@ -1,0 +1,168 @@
+body {
+    height: 924px;
+    display: flex;
+    flex-direction: column;
+    
+    #app {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0;
+        max-height: 924px;
+        margin: -8px;
+        
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0;
+            height: 100%;
+
+            header {
+                h1 {
+                    margin: 0;
+                    width: 100%;
+                }
+
+                padding-left: 15px;
+                padding-right: 15px;
+                padding-top: 15px;
+                flex: 0 1 55px;
+                background-color: #66bccf;
+            }
+
+            .main-wrapper {
+                display: flex;
+                left: 0;
+                flex: 1 0;
+
+                aside {
+                    flex: 0 1 170px;
+                    height: 100%;
+                    overflow: auto;
+                    padding: 15px;
+
+                    .routes {
+                        list-style: none;
+                    }
+                }
+
+                .content {
+                    flex: 1 1 calc(100% - 200px);
+                    height: 100%;
+                    overflow: auto;
+                    padding: 0px 20px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+
+                    .todos-page {
+                        width: 45%;
+                        background: #dadada;
+
+                        .page-title {
+                            text-align: center;
+                        }
+
+                        .todos-container {
+                            width: 100%;
+
+                            .toggle-completed {
+                                display: block;
+                                margin: auto;
+                            }
+
+                            .add-button {
+                                text-align: right;
+
+                                .add-todo {
+                                    border-radius: 5px;
+                                    padding: 3px 4px;
+                                    margin-right: 50px;
+                                    text-align: center;
+                                    cursor: pointer;
+                                    border: 1px solid #bababa;
+                                    background: #eaeaea;
+                                    color: #bababa;
+                                    
+                                    &:hover {
+                                        border: 1px solid #30B430;
+                                        color: #30B430;
+                                    }
+                                }
+                            }
+
+
+                            .actual-list {
+                                list-style: none;
+                                padding: 10px 20px;
+
+                                li {
+                                    margin-bottom: 10px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    &:last-child {
+                                        margin: 0;
+                                    }
+
+                                    >label {
+                                    }
+
+                                    [type="text"] {
+                                        flex: 0 1 65%;
+                                        font-size: 20px;
+
+                                        &:focus {
+                                            background: #f2f2f2;
+                                        }
+                                    }
+                                    [type="checkbox"] {
+                                        flex: 0 1 100px;
+                                    }
+
+                                    input {
+                                        line-height: 1em;
+                                        margin-right: 20px;
+                                    }
+
+                                    .todo-options {
+                                        flex: 1 0;
+                                        display: flex;
+                                        align-items: flex-end;
+                                        justify-content: flex-end;
+
+                                        i {
+                                            cursor: pointer;
+                                            border-radius: 3px;
+                                            color: #fff;
+                                            font-size: 25px;
+                                            padding: 2px;
+                                            margin: 0px 5px;
+
+                                            &.delete {
+                                                background: #FC413B;
+                                            }
+
+                                            &.edit {
+                                                background: #40C6FC;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .todo-title {
+                                    background: transparent;
+                                    border: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: blue;
+    }
+}
