@@ -25,7 +25,9 @@ export default class Task extends React.Component {
         }
     }
     editTask = (e) => {
-        this.titleInput.focus();
+        if (!this.props.done) {
+            this.titleInput.focus();
+        }
     }
     render() {
         console.log('rendering task with title ' + this.props.title, this.state);
@@ -41,12 +43,13 @@ export default class Task extends React.Component {
                     />
                     <input
                         type="text"
-                        className="todo-title"
+                        className={`todo-title${this.props.done? ' done' : ''}`}
                         value={this.props.title}
                         title="Click to edit."
                         onChange={this.props.updateTodo(this.props.index, this)}
-                        onBlur={this.props.removeLastEmpty(this.props.index)}
+                        onBlur={this.props.removeLastEmpty(this.props.index, this)}
                         onKeyUp={this.props.createNewTask}
+                        disabled={this.props.done}
                         name="title"
                         ref={(input) => {this.titleInput = input;}}
                         id={`todo-title-${this.props.index}`}

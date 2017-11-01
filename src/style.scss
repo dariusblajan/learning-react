@@ -152,6 +152,10 @@ body {
                                 .todo-title {
                                     background: transparent;
                                     border: 0;
+
+                                    &.done {
+                                        text-decoration: line-through;
+                                    }
                                 }
                             }
                         }

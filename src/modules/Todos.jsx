@@ -49,7 +49,7 @@ export default class Todos extends React.Component {
             this.setState({
                 data: list
             });
-        } else if (notDoneList.length) {
+        } else if (notDoneList.length && !notDoneList[notDoneList.length - 1].title.length) {
             document.getElementById(`todo-title-${notDoneList.length - 1}`).focus();
         }
     }
@@ -70,13 +70,15 @@ export default class Todos extends React.Component {
             }
         }
     }
-    removeLastEmpty = (index) => {
+    removeLastEmpty = (index, self) => {
         return (e) => {
             let target = this.state.data.find(item => item.index === index);
             if (target && !target.title && index == this.state.data.length - 1 && index) {
                 console.log('removed last empty');
                 this.state.data.splice(this.state.data.length - 1, 1);
                 this.setState(this.state);
+            } else if (!target.title && index != this.state.data.length - 1) {
+                self.titleInput.focus();
             }
         }
     }
