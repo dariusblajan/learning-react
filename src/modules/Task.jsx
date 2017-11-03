@@ -9,11 +9,11 @@ export default class Task extends React.Component {
         this.setState({
             title: this.props.title,
             done: this.props.done,
-            index: this.props.index
+            id: this.props.id
         });
     }
-    shoudlComponentUpdate(nextProps, nextState) {
-        if ((this.props.title != nextProps.title || this.props.done != nextProps.done || this.props.index != nextProps.index)) {
+    shouldComponentUpdate(nextProps, nextState) {
+        if ((this.props.title != nextProps.title || this.props.done != nextProps.done || this.props.id != nextProps.id)) {
             return true;
         } else {
             return false;
@@ -32,27 +32,27 @@ export default class Task extends React.Component {
     render() {
         console.log('rendering task with title ' + this.props.title, this.state);
         return (
-            <li key={this.props.index}>
-                <label id={`todo-${this.props.index}`}>
+            <li key={this.props.id}>
+                <label id={`todo-${this.props.id}`}>
                     <input
                         type="checkbox"
                         name="done"
                         checked={this.props.done}
-                        onChange={this.props.updateTodo(this.props.index, this)}
-                        id={`todo-done-${this.props.index}`}
+                        onChange={this.props.updateTodo(this.props.id, this)}
+                        id={`todo-done-${this.props.id}`}
                     />
                     <input
                         type="text"
                         className={`todo-title${this.props.done? ' done' : ''}`}
                         value={this.props.title}
                         title="Click to edit."
-                        onChange={this.props.updateTodo(this.props.index, this)}
-                        onBlur={this.props.removeLastEmpty(this.props.index, this)}
+                        onChange={this.props.updateTodo(this.props.id, this)}
+                        onBlur={this.props.removeLastEmpty(this.props.id, this)}
                         onKeyUp={this.props.createNewTask}
                         disabled={this.props.done}
                         name="title"
                         ref={(input) => {this.titleInput = input;}}
-                        id={`todo-title-${this.props.index}`}
+                        id={`todo-title-${this.props.id}`}
                     />
                 </label>
                 <span className="todo-options">
@@ -66,7 +66,7 @@ export default class Task extends React.Component {
                         tag="i"
                         name="trash"
                         className="delete"
-                        onClick={this.props.deleteTask(this.props.index)}
+                        onClick={this.props.deleteTask(this.props.id)}
                     />
                 </span>
             </li>
