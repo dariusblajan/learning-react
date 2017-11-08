@@ -30,7 +30,6 @@ export default class Task extends React.Component {
         }
     }
     render() {
-        console.log('rendering task with title ' + this.props.title, this.state);
         return (
             <li key={this.props.id}>
                 <label id={`todo-${this.props.id}`}>

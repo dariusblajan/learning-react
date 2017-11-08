@@ -5,7 +5,6 @@ import FontAwesome from 'react-fontawesome';
 
 class TodosList extends React.Component {
     parseList = () => {
-        console.log('data received in list', JSON.stringify(this.props.data.map(item => item.title + ' - ' + item.id)));
         let listItems = this.props.data.filter(item => item.done == this.props.completed);
         listItems = listItems.map(
             todo => (
@@ -49,38 +48,29 @@ export default class Todos extends React.Component {
             this.setState({
                 data: list
             });
-            console.warn('created task with id ', newID);
         } else if (notDoneList.length && !notDoneList[notDoneList.length - 1].title.length) {
-            document.getElementById(`todo-title-${notDoneList.length - 1}`).focus();
+            document.getElementById(`todo-title-${notDoneList[notDoneList.length - 1].id}`).focus();
         }
     }
     deleteTask = (id) => {
         return (e) => {
             if (this.state.data.find(item => item.id === id)) {
-                let idArray = this.state.data.map(item => item.id);
-                console.log('deleting from id ' + id);
-                console.log('state before delete', JSON.stringify(this.state.data.map(item => item.title)));
-                let index = idArray.indexOf(id);
-
-                this.state.data.splice(index, 1);
-                console.log('state after delete', JSON.stringify(this.state.data.map(item => item.title)));
-                let newData = [].concat(this.state.data);
-                this.setState({
-                    data: newData
-                });
-            } else {
-                console.log('nothing to delete');
+                this.setState(prevState => ({
+                    data: prevState.data.filter(el => el.id !== id)
+                }));
             }
         }
     }
     removeLastEmpty = (id, self) => {
         return (e) => {
+            if (e.type.indexOf('key') !== -1) {
+                return;
+            }
             let target = this.state.data.find(item => item.id === id);
-            if (target && !target.title && id == this.state.data.length - 1 && id) {
-                console.log('removed last empty');
+            if (target && !target.title && id == this.state.data[this.state.data.length - 1].id && id !== 0) {
                 this.state.data.splice(this.state.data.length - 1, 1);
                 this.setState(this.state);
-            } else if (!target.title && id != this.state.data.length - 1) {
+            } else if (!target.title && id != this.state.data[this.state.data.length - 1].id) {
                 self.titleInput.focus();
             }
         }
@@ -93,22 +83,14 @@ export default class Todos extends React.Component {
             let target = this.state.data.find(item => item.id === id);
             
             target[e.target.name] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-            console.warn(`target[${e.target.name}] = ${e.target.type === 'checkbox' ? e.target.checked : e.target.value}`);
-            this.state.data[id] = Object.assign({}, target);
-            console.warn(this.state.data[id], id);
 
-            // self.setState({
-            //     [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value
-            // });
-            console.warn(this.state.data);
             this.setState(this.state);
         }
     }
     render() {
-        console.log('rendering list component');
         return (
             <div className="todos-container">
-               <div className="add-button">
+                <div className="add-button">
                     <FontAwesome className="add-todo" onClick={this.createNewTask} tag="i" name="plus" />
                 </div>
                 <TodosList
