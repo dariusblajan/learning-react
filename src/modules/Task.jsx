@@ -5,15 +5,8 @@ export default class Task extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount() {
-        this.setState({
-            title: this.props.title,
-            done: this.props.done,
-            id: this.props.id
-        });
-    }
     shouldComponentUpdate(nextProps, nextState) {
-        if ((this.props.title != nextProps.title || this.props.done != nextProps.done || this.props.id != nextProps.id)) {
+        if ((this.props.title !== nextProps.title || this.props.done !== nextProps.done)) {
             return true;
         } else {
             return false;

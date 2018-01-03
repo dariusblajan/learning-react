@@ -63,14 +63,14 @@ export default class Todos extends React.Component {
     }
     removeLastEmpty = (id, self) => {
         return (e) => {
-            if (e.type.indexOf('key') !== -1) {
+            let target = this.state.data.find(item => item.id === id);
+            if (e.type.indexOf('key') !== -1 || !target || target.title !== '') {
                 return;
             }
-            let target = this.state.data.find(item => item.id === id);
-            if (target && !target.title && id == this.state.data[this.state.data.length - 1].id && id !== 0) {
+            if (id == this.state.data[this.state.data.length - 1].id && id !== 0) {
                 this.state.data.splice(this.state.data.length - 1, 1);
                 this.setState(this.state);
-            } else if (!target.title && id != this.state.data[this.state.data.length - 1].id) {
+            } else if (id != this.state.data[this.state.data.length - 1].id) {
                 self.titleInput.focus();
             }
         }

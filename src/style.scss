@@ -105,10 +105,12 @@ body {
                                     }
 
                                     >label {
+                                        display: flex;
+                                        flex: 1 0;
                                     }
 
                                     [type="text"] {
-                                        flex: 0 1 65%;
+                                        flex: 1 0;
                                         font-size: 20px;
 
                                         &:focus {
@@ -116,16 +118,15 @@ body {
                                         }
                                     }
                                     [type="checkbox"] {
-                                        flex: 0 1 100px;
+                                        flex: 0 1 30px;
                                     }
 
                                     input {
                                         line-height: 1em;
-                                        margin-right: 20px;
                                     }
 
                                     .todo-options {
-                                        flex: 1 0;
+                                        flex: 0 1 120px;
                                         display: flex;
                                         align-items: flex-end;
                                         justify-content: flex-end;

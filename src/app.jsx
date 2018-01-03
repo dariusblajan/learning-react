@@ -4,6 +4,9 @@ import Content from './modules/Content.jsx';
 import Sidebar from './modules/Sidebar.jsx';
 
 export default class App extends React.Component {
+    componentDidCatch(error, info) {
+        console.error(error, info);
+    }
     render() {
         return (
             <div className='app-container'>
