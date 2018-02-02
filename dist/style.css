@@ -1,2 +1,117 @@
 body {
-  background: red; }
+  height: 924px;
+  display: flex;
+  flex-direction: column; }
+  body #app {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    height: 100%;
+    margin: -8px; }
+    body #app .app-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0;
+      height: 100%; }
+      body #app .app-container header {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 15px;
+        flex: 0 1 55px;
+        background-color: #66bccf; }
+        body #app .app-container header h1 {
+          margin: 0;
+          width: 100%; }
+      body #app .app-container .main-wrapper {
+        display: flex;
+        left: 0;
+        flex: 1 0;
+        height: calc(100% - 70px); }
+        body #app .app-container .main-wrapper aside {
+          flex: 0 1 170px;
+          height: 100%;
+          overflow: auto;
+          padding: 15px; }
+          body #app .app-container .main-wrapper aside .routes {
+            list-style: none; }
+        body #app .app-container .main-wrapper .content {
+          flex: 1 1 calc(100% - 200px);
+          height: 100%;
+          padding: 0px 20px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          background: #dadada; }
+          body #app .app-container .main-wrapper .content .todos-page {
+            width: 40%;
+            background: #fff;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0; }
+            body #app .app-container .main-wrapper .content .todos-page .page-title {
+              text-align: center; }
+            body #app .app-container .main-wrapper .content .todos-page .todos-container {
+              width: 100%;
+              height: calc(100% - 70px); }
+              body #app .app-container .main-wrapper .content .todos-page .todos-container .toggle-completed {
+                display: block;
+                margin: auto; }
+              body #app .app-container .main-wrapper .content .todos-page .todos-container .add-button {
+                text-align: right; }
+                body #app .app-container .main-wrapper .content .todos-page .todos-container .add-button .add-todo {
+                  border-radius: 5px;
+                  padding: 3px 4px;
+                  margin-right: 50px;
+                  text-align: center;
+                  cursor: pointer;
+                  border: 1px solid #bababa;
+                  background: #eaeaea;
+                  color: #bababa; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .add-button .add-todo:hover {
+                    border: 1px solid #30B430;
+                    color: #30B430; }
+              body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list {
+                list-style: none;
+                padding: 10px 20px;
+                overflow: auto;
+                height: calc(100% - 85px); }
+                body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li {
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li:last-child {
+                    margin: 0; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li > label {
+                    display: flex;
+                    flex: 1 0; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li [type="text"] {
+                    flex: 1 0;
+                    font-size: 20px; }
+                    body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li [type="text"]:focus {
+                      background: #f2f2f2; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li [type="checkbox"] {
+                    flex: 0 1 30px; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li input {
+                    line-height: 1em; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li .todo-options {
+                    flex: 0 1 120px;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: flex-end; }
+                    body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li .todo-options i {
+                      cursor: pointer;
+                      border-radius: 3px;
+                      color: #fff;
+                      font-size: 25px;
+                      padding: 2px;
+                      margin: 0px 5px; }
+                      body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li .todo-options i.delete {
+                        background: #FC413B; }
+                      body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list li .todo-options i.edit {
+                        background: #40C6FC; }
+                body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list .todo-title {
+                  background: transparent;
+                  border: 0; }
+                  body #app .app-container .main-wrapper .content .todos-page .todos-container .actual-list .todo-title.done {
+                    text-decoration: line-through; }
+  body a {
+    text-decoration: none;
+    color: blue; }

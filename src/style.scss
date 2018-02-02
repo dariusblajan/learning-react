@@ -7,7 +7,7 @@ body {
         display: flex;
         flex-direction: column;
         flex: 1 0;
-        max-height: 924px;
+        height: 100%;
         margin: -8px;
         
         .app-container {
@@ -33,6 +33,7 @@ body {
                 display: flex;
                 left: 0;
                 flex: 1 0;
+                height: calc(100% - 70px);
 
                 aside {
                     flex: 0 1 170px;
@@ -48,35 +49,38 @@ body {
                 .content {
                     flex: 1 1 calc(100% - 200px);
                     height: 100%;
-                    overflow: auto;
                     padding: 0px 20px;
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
-
+                    background: #dadada;
+                    
                     .todos-page {
-                        width: 45%;
-                        background: #dadada;
+                        width: 40%;
+                        background: #fff;
+                        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
 
                         .page-title {
                             text-align: center;
                         }
 
-                        .todos-container {
-                            width: 100%;
+                        .add-section {
+                            display: flex;
+                            padding: 0px 15px;
 
-                            .toggle-completed {
-                                display: block;
-                                margin: auto;
+                            #new-todo {
+                                flex: 1 0 40%;
+                                line-height: 1em;
                             }
 
                             .add-button {
                                 text-align: right;
+                                margin-left: 15px;
+                                flex: 0 1;
 
                                 .add-todo {
                                     border-radius: 5px;
                                     padding: 3px 4px;
-                                    margin-right: 50px;
                                     text-align: center;
                                     cursor: pointer;
                                     border: 1px solid #bababa;
@@ -89,24 +93,37 @@ body {
                                     }
                                 }
                             }
+                        }
 
+
+                        .todos-container {
+                            width: 100%;
+                            height: calc(100% - 70px);
+
+                            .toggle-completed {
+                                display: block;
+                                margin: auto;
+                            }
 
                             .actual-list {
                                 list-style: none;
                                 padding: 10px 20px;
+                                overflow: auto;
+                                // height: calc(100% - 85px);
 
                                 li {
                                     margin-bottom: 10px;
-                                    display: flex;
                                     align-items: center;
+
+                                    .non-editable, .editable {
+                                        display: flex;
+                                        flex: 1 0;
+                                    }
+
+                                    display: flex;
 
                                     &:last-child {
                                         margin: 0;
-                                    }
-
-                                    >label {
-                                        display: flex;
-                                        flex: 1 0;
                                     }
 
                                     [type="text"] {
@@ -122,6 +139,14 @@ body {
                                     }
 
                                     input {
+                                        line-height: 1em;
+                                    }
+
+                                    .todo-name {
+                                        flex: 1 0;
+                                        display: inline-block;
+                                        padding: 0 5px;
+                                        font-size: 22px;
                                         line-height: 1em;
                                     }
 
@@ -145,6 +170,10 @@ body {
 
                                             &.edit {
                                                 background: #40C6FC;
+                                            }
+
+                                            &.save {
+                                                background: purple;
                                             }
                                         }
                                     }
