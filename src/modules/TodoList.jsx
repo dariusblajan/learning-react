@@ -1,32 +1,32 @@
 import React from 'react';
 import Todo from './Todo.jsx';
 import AddTodo from './AddTodo.jsx';
+import { connect } from 'react-redux';
+import { addTodo, updateTodo, deleteTodo, editModeTodo } from '../action-creators.js';
 
 class TodosList extends React.Component {
     render() {
         return (
             <ul className="actual-list">
-                {this.props.data.map(
-                    todo => (
-                        <Todo
-                            key={`task-${todo.id}`}
-                            done={todo.done}
-                            title={todo.title}
-                            id={todo.id}
-                            editMode={todo.editMode}
-                            toggleEditMode={this.props.toggleEditMode}
-                            moveCaretAtEnd={this.props.moveCaretAtEnd}
-                            updateTodo={this.props.updateList}
-                            deleteTask={this.props.deleteTask}
-                        />
-                    )
+                {this.props.data.map(todo => (
+                    <Todo
+                        key={`task-${todo.id}`}
+                        done={todo.done}
+                        text={todo.text}
+                        id={todo.id}
+                        editMode={todo.editMode}
+                        toggleEditMode={this.props.toggleEditMode}
+                        moveCaretAtEnd={this.props.moveCaretAtEnd}
+                        updateTodo={this.props.updateList}
+                        deleteTask={this.props.deleteTask}
+                    />)
                 )}
             </ul>
         );
     }
 };
 
-export default class Todos extends React.Component {
+class Todos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {showCompleted: false, data: []};
@@ -38,72 +38,37 @@ export default class Todos extends React.Component {
     }
     createNewTask = (e) => {
         if ((e.which === 13 || !e.which) && e.target.value) {
-            let newTask = {
-                title: e.target.value,
-                id: this.props.createID(this.state.data),
-                done: false,
-                editMode: false
-            };
-            this.setState({
-                data: this.state.data.concat([newTask])
-            });
+            this.props.addTodo(e.target.value);
+            
             e.target.value = '';
         }
     }
-    deleteTask = (id) => {
-        return (e) => {
-            if (this.state.data.filter(item => item.id === id).length) {
-                this.setState(prevState => ({
-                    data: prevState.data.filter(el => el.id !== id)
-                }));
-            }
-        }
+    deleteTask = (id) => e => {
+        this.props.deleteTodo(id);
     }
-    toggleEditMode = (id) => {
-        return () => {
-            let newList = [].concat(this.state.data); // new copy of the todos list
-            let target = newList.find(item => item.id === id); // identify the targeted todo in the copied list
-    
-            // toggle the target's edit mode status
-            target.editMode = !target.editMode;
-    
-            // turn off all other todo's editMode
-            newList.forEach(item => {
-                if (item.id !== id) {
-                    item.editMode = false;
-                }
-            });
-    
-            this.setState(newList);
-        }
+    toggleEditMode = (id) => e => {
+        let key = e.target.name;
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        
+        this.props.toggleEditTodo(id);
+    }
+    updateList = (id) => e => {
+        let key = e.target.name;
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        
+        this.props.updateTodo(id, key, value);
     }
     toggleCompletedList = () => {
         this.setState({showCompleted: !this.state.showCompleted});
     }
-    updateList = (id) => {
-        return (e) => {
-            let target = this.state.data.filter(item => item.id === id)[0]; // new copy of the item being updated
-            let index = this.state.data.findIndex(item => item.id === id);
-            
-            // mutations are allowed on newly created item
-            target[e.target.name] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-
-            // injecting the updated item to the new state
-            this.setState([
-                ...this.state.data.slice(0, index),
-                target,
-                ...this.state.data.slice(index + 1)
-            ]);
-        }
-    }
     render() {
         const { showCompleted } = this.state;
-        const { data } = this.state;
+        const { data } = this.props;
         const buttonIsDisabled = !showCompleted && (data.filter(item => item.done === true).length? false: true);
-
+        
         return (
             <div className="todos-container">
-                <AddTodo createNewTask={this.createNewTask}/>
+                <AddTodo createNewTask={this.createNewTask} />
                 <TodosList
                     data={data.filter(item => item.done == false)}
                     updateList={this.updateList}
@@ -127,3 +92,27 @@ export default class Todos extends React.Component {
         );
     }
 };
+
+const mapStateToProps = (state) => ({
+    data: state
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addTodo(value) {
+        return dispatch(addTodo(value));
+    },
+    updateTodo(id, key, value) {
+        return dispatch(updateTodo(key, value, id));
+    },
+    deleteTodo(id) {
+        return dispatch(deleteTodo(id));
+    },
+    toggleEditTodo(id) {
+        return dispatch(editModeTodo(id));
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Todos);

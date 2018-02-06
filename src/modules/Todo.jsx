@@ -7,15 +7,14 @@ export default class Todo extends React.Component {
     }
     shouldComponentUpdate(nextProps, nextState) {
         return (
-            this.props.title !== nextProps.title ||
+            this.props.text !== nextProps.text ||
             this.props.done !== nextProps.done ||
-            this.props.editMode !== nextProps.editMode ||
             this.props.editMode !== nextProps.editMode
         );
     }
     componentDidUpdate() {
         if (this.props.editMode) {
-            this.titleInput.focus();
+            this.textInput.focus();
         }
     }
     render() {
@@ -30,9 +29,9 @@ export default class Todo extends React.Component {
                     onChange={props.updateTodo(props.id)}
                     id={`todo-done-${props.id}`}
                 />
-                {!props.editable && !props.done? (
+                {!props.editMode && !props.done? (
                     <div className="non-editable">
-                        <span className="todo-name">{props.title}</span>
+                        <span className="todo-name">{props.text}</span>
                         <span className="todo-options">
                             <FontAwesome
                                 tag="i"
@@ -52,16 +51,16 @@ export default class Todo extends React.Component {
                     <label id={`todo-${props.id}`} className="editable">
                         <input
                             type="text"
-                            className={`todo-title${props.done? ' done' : ''}`}
-                            value={props.title}
+                            className={`todo-text${props.done? ' done' : ''}`}
+                            value={props.text}
                             title="Click to edit."
                             onChange={props.updateTodo(props.id)}
                             onFocus={props.moveCaretAtEnd}
                             onBlur={props.toggleEditMode(props.id)}
                             disabled={props.done}
-                            name="title"
-                            ref={(input) => {this.titleInput = input;}}
-                            id={`todo-title-${props.id}`}
+                            name="text"
+                            ref={(input) => {this.textInput = input;}}
+                            id={`todo-text-${props.id}`}
                         />
                         {!props.done &&
                         <span className="todo-options">

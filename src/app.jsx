@@ -4,6 +4,9 @@ import Content from './modules/Content.jsx';
 import Sidebar from './modules/Sidebar.jsx';
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     componentDidCatch(error, info) {
         console.error(error, info);
     }
@@ -13,7 +16,7 @@ export default class App extends React.Component {
                 <Header/>
                 <div className='main-wrapper'>
                     {/* <Sidebar/> */}
-                    <Content/>
+                    <Content />
                 </div>
             </div>
         );
