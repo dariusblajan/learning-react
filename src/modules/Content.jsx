@@ -1,13 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TodosPage from './TodosPage.jsx';
 import TaskInfo from './TaskInfo.jsx';
 import { Route } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
-
-TodosPage.contextTypes = {
-    store: PropTypes.object
-}
 
 export default class Content extends React.Component {
     componentDidCatch(err) {

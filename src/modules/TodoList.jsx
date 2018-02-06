@@ -26,6 +26,23 @@ class TodosList extends React.Component {
     }
 };
 
+export default @connect(
+    state => ({data: state}),
+    dispatch => ({
+        addTodo(value) {
+            return dispatch(addTodo(value));
+        },
+        updateTodo(id, key, value) {
+            return dispatch(updateTodo(key, value, id));
+        },
+        deleteTodo(id) {
+            return dispatch(deleteTodo(id));
+        },
+        toggleEditTodo(id) {
+            return dispatch(editModeTodo(id));
+        }
+    })
+)
 class Todos extends React.Component {
     constructor(props) {
         super(props);
@@ -92,27 +109,3 @@ class Todos extends React.Component {
         );
     }
 };
-
-const mapStateToProps = (state) => ({
-    data: state
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    addTodo(value) {
-        return dispatch(addTodo(value));
-    },
-    updateTodo(id, key, value) {
-        return dispatch(updateTodo(key, value, id));
-    },
-    deleteTodo(id) {
-        return dispatch(deleteTodo(id));
-    },
-    toggleEditTodo(id) {
-        return dispatch(editModeTodo(id));
-    }
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Todos);
