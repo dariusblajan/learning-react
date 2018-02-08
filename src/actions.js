@@ -1,0 +1,5 @@
+export const ADD_TODO = 'ADD_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const EDIT_MODE_TODO = 'EDIT_MODE_TODO';
+export const TOGGLE_COMPLETED_LIST = 'TOGGLE_COMPLETED_LIST';

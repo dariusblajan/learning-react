@@ -9,16 +9,17 @@ export default class Todo extends React.Component {
         return (
             this.props.text !== nextProps.text ||
             this.props.done !== nextProps.done ||
-            this.props.editMode !== nextProps.editMode
+            this.props.editModeId !== nextProps.editModeId
         );
     }
     componentDidUpdate() {
-        if (this.props.editMode) {
+        if (this.props.editModeId === this.props.id) {
             this.textInput.focus();
         }
     }
     render() {
         const { props } = this;
+        const editMode = props.editModeId === props.id;
         
         return (
             <li key={props.id}>
@@ -29,7 +30,7 @@ export default class Todo extends React.Component {
                     onChange={props.updateTodo(props.id)}
                     id={`todo-done-${props.id}`}
                 />
-                {!props.editMode && !props.done? (
+                {!editMode && !props.done? (
                     <div className="non-editable">
                         <span className="todo-name">{props.text}</span>
                         <span className="todo-options">

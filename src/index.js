@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './app.jsx';
 import Redux from 'redux';
 import { createStore } from 'redux';
-import Reducer from './Reducers.js';
-import App from './app.jsx';
-import { BrowserRouter as Router } from 'react-router-dom';
+import Reducer from './reducers/main-reducer'
 import './style.scss';
 
 const render = Component => {
@@ -25,5 +25,5 @@ render(App);
 
 if (module.hot) {
     module.hot.accept('./app.jsx', () => { render(App); });
-    module.hot.accept('./Reducers.js', () => { store.replaceReducer(reducer); });
+    module.hot.accept('./reducers/main-reducer', () => { store.replaceReducer(Reducer); });
 }
