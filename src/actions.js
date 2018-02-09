@@ -1,4 +1,6 @@
 export const ADD_TODO = 'ADD_TODO';
+export const ADD_ERROR = 'ADD_ERROR';
+export const ADD_TODO_REQUESTED = 'ADD_TODO_REQUESTED';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const EDIT_MODE_TODO = 'EDIT_MODE_TODO';

@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import Todo from './Todo.jsx';
 import AddTodo from './AddTodo.jsx';
 import { connect } from 'react-redux';
-import { addTodo, updateTodo, deleteTodo, editModeTodo, toggleCompletedList } from '../action-creators.js';
+import * as todoAction from '../action-creators.js';
 
 class TodosList extends React.Component {
     render() {
@@ -34,20 +34,20 @@ export default @connect(
         showCompleted: state.listAttributes.get('showCompleted')
     }),
     dispatch => ({
-        addTodo(value) {
-            return dispatch(addTodo(value));
+        addTodo(value) { 
+            return dispatch(todoAction.addTodoRequested(value));
         },
         updateTodo(id, key, value) {
-            return dispatch(updateTodo(key, value, id));
+            return dispatch(todoAction.updateTodo(key, value, id));
         },
         deleteTodo(id) {
-            return dispatch(deleteTodo(id));
+            return dispatch(todoAction.deleteTodo(id));
         },
         toggleEditTodo(id) {
-            return dispatch(editModeTodo(id));
+            return dispatch(todoAction.editModeTodo(id));
         },
         toggleCompletedList() {
-            return dispatch(toggleCompletedList());
+            return dispatch(todoAction.toggleCompletedList());
         }
     })
 )
