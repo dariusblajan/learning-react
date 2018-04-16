@@ -2,8 +2,25 @@ import React from 'react';
 import Header from './modules/Header.jsx';
 import Content from './modules/Content.jsx';
 import Sidebar from './modules/Sidebar.jsx';
+import { withStyles } from 'material-ui/styles';
 
-export default class App extends React.Component {
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '1 0',
+        height: '100%'
+    },
+    wrapper: {
+        display: 'flex',
+        left: 0,
+        flex: '1 0',
+        height: 'calc(100% - 70px)'
+    }
+};
+
+export default @withStyles(styles)
+class App extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -11,10 +28,11 @@ export default class App extends React.Component {
         console.error(error, info);
     }
     render() {
+        const { classes } = this.props;
         return (
-            <div className='app-container'>
+            <div className={classes.container}>
                 <Header/>
-                <div className='main-wrapper'>
+                <div className={classes.wrapper}>
                     {/* <Sidebar/> */}
                     <Content />
                 </div>

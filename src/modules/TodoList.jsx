@@ -3,12 +3,36 @@ import Immutable from 'immutable';
 import Todo from './Todo.jsx';
 import AddTodo from './AddTodo.jsx';
 import { connect } from 'react-redux';
+import Button from 'material-ui/Button';
 import * as todoAction from '../action-creators.js';
+import { withStyles } from 'material-ui/styles';
+import List from 'material-ui/List';
 
+const styles = {
+    todosContainer: {
+        width: '100%',
+        height: 'calc(100% - 70px)'
+    },
+    toggleCompleted: {
+        display: 'block',
+        margin: 'auto'
+    }
+};
+
+const listStyles = {
+    list: {
+        padding: '10px 20px',
+        overflow: 'auto'
+    }
+};
+
+@withStyles(listStyles)
 class TodosList extends React.Component {
     render() {
+        const { classes } = this.props;
+
         return (
-            <ul className="actual-list">
+            <List className={classes.list}>
                 {this.props.data.map(todo => (
                     <Todo
                         key={`task-${todo.get('id')}`}
@@ -22,12 +46,12 @@ class TodosList extends React.Component {
                         deleteTask={this.props.deleteTask}
                     />)
                 )}
-            </ul>
+            </List>
         );
     }
 };
 
-export default @connect(
+@connect(
     state => ({
         data: state.todoList,
         editModeId: state.listAttributes.get('editModeId'),
@@ -51,6 +75,7 @@ export default @connect(
         }
     })
 )
+@withStyles(styles)
 class Todos extends React.Component {
     constructor(props) {
         super(props);
@@ -81,7 +106,7 @@ class Todos extends React.Component {
         this.props.updateTodo(id, key, value);
     }
     render() {
-        const { data, editModeId, showCompleted } = this.props;
+        const { data, editModeId, showCompleted, classes } = this.props;
         const buttonIsDisabled = !showCompleted && (data.filter(item => item.get('done') === true).size? false: true);
         
         return (
@@ -105,10 +130,18 @@ class Todos extends React.Component {
                     moveCaretAtEnd={this.moveCaretAtEnd}
                     deleteTask={this.deleteTask}
                 />}
-                <button className="toggle-completed" disabled={buttonIsDisabled} onClick={this.props.toggleCompletedList}>
+                <Button
+                    className={classes.toggleCompleted}
+                    disabled={buttonIsDisabled}
+                    onClick={this.props.toggleCompletedList}
+                    variant='raised'
+
+                >
                     {showCompleted? 'Hide' : 'Show'} completed todos
-                </button>
+                </Button>
             </div>
         );
     }
 };
+
+export default Todos;

@@ -1,17 +1,32 @@
 import React from 'react';
 import TodoList from './TodoList.jsx';
-import FontAwesome from 'react-fontawesome';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
 
-export default class TodosPage extends React.Component {
+const styles = {
+    todosPage: {
+        width: '40%'
+    },
+    pageTitle: {
+        textAlign: 'center'
+    }
+}
+
+@withStyles(styles)
+class TodosPage extends React.Component {
     constructor(props, context) {
         super(props);
     }
     render() {
+        const { classes } = this.props;
+
         return (
-            <div className="todos-page">
-                <h2 className='page-title'>Todos List</h2>
+            <Paper className={classes.todosPage}>
+                <h2 className={classes.pageTitle}>Todos List</h2>
                 <TodoList />
-            </div>
+            </Paper>
         )
     }
 };
+
+export default TodosPage;

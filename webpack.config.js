@@ -19,7 +19,8 @@ module.exports = {
 
     devServer: {
         hot: !PROD,
-        historyApiFallback: true
+        historyApiFallback: true,
+        port: 8082
     },
 
     plugins: [
